@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pantalla de carga de Wahl" />
+    <title>Pantalla de carga - Wahl</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="loading-screen">
+        <div class="loader">
+            <!-- Logo/Medallion with Orbiting Element -->
+            <div class="medallion-container">
+                <div class="medallion">
+                    <div class="ball">
+                        <img src="imagenes/W.png" alt="Logo Wahl" class="ball-image" />
+                    </div>
+                </div>
+                <!-- Orbiting Element -->
+                <div class="orbit">
+                    <div class="orbit-item"></div>
+                </div>
+            </div>
+
+            <!-- Text Status -->
+            <div class="loading-text">
+                <p class="loading-status">Cargando...</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+
+            <!-- Loading Tips (Optional) -->
+            <p class="loading-tip">Preparando tu experiencia</p>
+
+            <!-- Random Tips/Data for Desktop -->
+            <p class="random-tip"></p>
+        </div>
+    </div>
+
+    <script>
+        // Array of random tips and interesting facts
+        const tips = [
+            "💡 Wahl es líder en innovación tecnológica desde 1919",
+            "⚡ Nuestros productos están presentes en más de 150 países",
+            "🎯 Cada producto Wahl está diseñado para máxima precisión",
+            "🏆 Confianza de millones de profesionales en todo el mundo",
+            "🚀 La tecnología Wahl sigue revolucionando la industria",
+            "✨ Calidad premium en cada detalle de nuestros productos",
+            "🌟 Excelencia y rendimiento garantizados",
+            "💪 Potencia y durabilidad en cada uso",
+            "🎨 Diseño ergonómico para mayor comodidad",
+            "🔧 Tecnología patentada exclusivamente de Wahl",
+            "💎 Premium quality meets innovation",
+            "🌍 Transformando vidas alrededor del mundo",
+            "⭐ Más de 100 años de experiencia en excelencia",
+            "🔝 El estándar de oro en la industria",
+            "✅ Aprobado por profesionales de todo el mundo"
+        ];
+
+        // Function to show random tip
+        function showRandomTip() {
+            const randomIndex = Math.floor(Math.random() * tips.length);
+            const randomTip = tips[randomIndex];
+            const tipElement = document.querySelector('.random-tip');
+            tipElement.textContent = randomTip;
+            
+            // Only show on desktop (min-width: 768px)
+            if (window.innerWidth >= 768) {
+                tipElement.style.display = 'block';
+            } else {
+                tipElement.style.display = 'none';
+            }
+        }
+
+        // Show random tip on page load
+        window.addEventListener('load', () => {
+            showRandomTip();
+        });
+
+        // Show tip immediately for better UX
+        document.addEventListener('DOMContentLoaded', () => {
+            showRandomTip();
+        });
+
+        // Handle window resize for responsive behavior
+        window.addEventListener('resize', () => {
+            showRandomTip();
+        });
+
+        // Simulate progress
+        const progressFill = document.querySelector('.progress-fill');
+        let progress = 0;
+
+        const interval = setInterval(() => {
+            progress += Math.random() * 30;
+            if (progress > 90) progress = 90;
+            progressFill.style.width = progress + '%';
+        }, 300);
+
+        // Simulate complete loading
+        window.addEventListener('load', () => {
+            clearInterval(interval);
+            progressFill.style.width = '100%';
+            setTimeout(() => {
+                // Here you can redirect or do whatever you need
+                console.log('Page loaded');
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>
